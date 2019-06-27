@@ -1,7 +1,10 @@
 #include<iostream>
 #include<vector>
 using namespace std;
+
 vector<vector<int>>source_destination(100,vector<int>(100,0));
+
+
 class edge{
 private:
 	int src;
@@ -111,9 +114,9 @@ public:
 	}
 
 	//shortest path function you are free to change the return type of the function
-	void shortest_path(int source1,vector<vector<int>>source_destination)
+	float shortest_path(int source1,vector<vector<int>>source_destination)
 	{ 
-		
+		 float sum=0;
 	     vector <bool> span_tree(100);
 		 vector <int> distance(100);
 
@@ -148,8 +151,10 @@ public:
 	   } //bta3t el count 
 		for (int k=0; k < cnt_nodes;k++)
 		{
-		 cout <<k <<" " << distance[k] <<"\n";
+		 //cout <<k <<" " << distance[k] <<"\n";
+			sum= sum + distance [k];
 		}
+		return sum;
 
 	}
 
@@ -169,8 +174,8 @@ public:
 class centralized_algorithem:public base_algorithem{
 public:
 	void process()
-	{
-		//write your code here
+	{   
+          
 	}
 };
 class betweness_algorithem:public base_algorithem{
@@ -180,16 +185,34 @@ public:
 		//write your code here 
 	}
 };
+
+
+	
+
 int main()
 {
 	int no_nodes,no_edges;
 	cin>>no_nodes>>no_edges;
 
 	graph project_sys ;
+	
 
 	project_sys.set_nodes( no_nodes);
 	project_sys.take_input(no_nodes,no_edges);
-	project_sys.shortest_path(0,source_destination);
+	//project_sys.shortest_path(0,source_destination);
+
+
+	double n =project_sys.get_no_nodes();
+	double c[100];
+	for (int i=0; i < n; i ++)
+		{ 
+			double sum = project_sys.shortest_path(i,source_destination);
+			c[i]=(n-1)/sum ;
+			cout << i <<" " << c[i] <<"\n";
+		}
+	
+	//centralized_algorithem cent ;
+	//cent.process();
 	system("pause");
 	return 0;
 }
