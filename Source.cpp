@@ -161,7 +161,7 @@ public:
 };
 class base_algorithem{
 public:
-	virtual void process()=0;
+	virtual void process(graph z)=0;
 };
 class degree_algorithem:public base_algorithem{
 	//write degree algorithem here
@@ -172,10 +172,18 @@ public:
 	}
 };
 class centralized_algorithem:public base_algorithem{
+	
 public:
-	void process()
-	{   
-          
+	void process( graph project_sys)
+	{    double c[100];
+		double n =project_sys.get_no_nodes();
+       
+	for (int i=0; i < n; i ++)
+		{ 
+			double sum = project_sys.shortest_path(i,source_destination);
+			c[i]=(n-1)/sum ;
+			cout << c[i] <<"\n";
+		}    
 	}
 };
 class betweness_algorithem:public base_algorithem{
@@ -185,9 +193,6 @@ public:
 		//write your code here 
 	}
 };
-
-
-	
 
 int main()
 {
@@ -202,17 +207,11 @@ int main()
 	//project_sys.shortest_path(0,source_destination);
 
 
-	double n =project_sys.get_no_nodes();
-	double c[100];
-	for (int i=0; i < n; i ++)
-		{ 
-			double sum = project_sys.shortest_path(i,source_destination);
-			c[i]=(n-1)/sum ;
-			cout << i <<" " << c[i] <<"\n";
-		}
 	
-	//centralized_algorithem cent ;
-	//cent.process();
+
+	centralized_algorithem cent ;
+	cent.process(project_sys);
+
 	system("pause");
 	return 0;
 }
