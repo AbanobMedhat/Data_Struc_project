@@ -132,7 +132,7 @@ public:
 	void test() {
 		for (int i = 0;i < sys.get_no_nodes();i++)
 		{
-			cout << Degree_cen[i] << "   ";
+			cout << Degree_cen[i] << endl;
 		}
 	}
 };
