@@ -47,9 +47,9 @@ public:
 };
 class graph {
 private:
-	edge grph_edges[100];
 	int cnt_edges;
 	vector<int>nodes;
+	edge* grph_edges = new edge();
 	int cnt_nodes;
 public:
 	graph()
@@ -72,6 +72,8 @@ public:
 
 	void set_edge(edge edg)
 	{
+		//if (cnt_edges >= grph_edges.max_size())
+			//grph_edges.resize(3 * cnt_edges++);
 		grph_edges[cnt_edges] = edg;
 		cnt_edges++;
 	}
@@ -89,6 +91,7 @@ public:
 	}
 	void take_input(int no_nodes, int no_edges)
 	{
+		grph_edges = new edge[no_edges];
 		int src, des, weight;
 		for (int i = 0;i < no_edges;i++)
 		{
@@ -111,25 +114,25 @@ public:
 class degree_algorithem :public base_algorithem {
 private:
 	graph sys;
-	int* Degree_cen;
+	
 	edge graph_edges;
 	//write degree algorithem here
 public:
 	degree_algorithem(graph sys) {
 		this->sys = sys;
-	    Degree_cen = new int[sys.get_no_nodes()]{ 0 };
 	}
 	void process()
 	{
+		int*Degree_cen = new int[sys.get_no_nodes()]{ 0 };
 		for (int i = 0;i<sys.get_no_edges() ;i++)
 		{
 			graph_edges =sys.get_edge(i);
 			Degree_cen[graph_edges.get_src()]++;
 			Degree_cen[graph_edges.get_des()]++;
 		}
-
+		test(Degree_cen);
 	}
-	void test() {
+	void test(int* Degree_cen) {
 		for (int i = 0;i < sys.get_no_nodes();i++)
 		{
 			cout << Degree_cen[i] << endl;
@@ -159,8 +162,5 @@ int main()
 	/////////test degree algorithm
 	degree_algorithem Degree_Test(project_sys);
 	Degree_Test.process();
-	Degree_Test.test();
-	/////////////////////////
-	system("pause");
 	return 0;
 }
