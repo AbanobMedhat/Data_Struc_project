@@ -1,7 +1,11 @@
+// ConsoleApplication6.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+
 // Degree_Algorithm.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include "pch.h"
+//#include "pch.h"
 #include <iostream>
 
 #include<vector>
@@ -114,7 +118,7 @@ public:
 class degree_algorithem :public base_algorithem {
 private:
 	graph sys;
-	
+
 	edge graph_edges;
 	//write degree algorithem here
 public:
@@ -123,10 +127,14 @@ public:
 	}
 	void process()
 	{
-		int*Degree_cen = new int[sys.get_no_nodes()]{ 0 };
-		for (int i = 0;i<sys.get_no_edges() ;i++)
+		int*Degree_cen = new int[sys.get_no_nodes()];
+		for (int i = 0;i <= sys.get_no_nodes();i++)
 		{
-			graph_edges =sys.get_edge(i);
+			Degree_cen[i]=0;
+		}
+		for (int i = 0;i < sys.get_no_edges();i++)
+		{
+			graph_edges = sys.get_edge(i);
 			Degree_cen[graph_edges.get_src()]++;
 			Degree_cen[graph_edges.get_des()]++;
 		}
@@ -135,7 +143,7 @@ public:
 	void test(int* Degree_cen) {
 		for (int i = 0;i < sys.get_no_nodes();i++)
 		{
-			cout << Degree_cen[i] << endl;
+			cout << Degree_cen[i] <<'\n';
 		}
 	}
 };
